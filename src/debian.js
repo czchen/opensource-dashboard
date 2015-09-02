@@ -7,13 +7,9 @@ export const getPackageInformation = (pkg) => {
         request.get({
             url:`https://sources.debian.net/api/src/${pkg}/`
         }, (error, rsp, body) => {
-            if (error) {
-                return reject(error);
-            }
+            if (error) return reject(error);
 
-            if (rsp.statusCode !== HTTPStatus.OK) {
-                return reject(new Error(`Got ${rsp.statusCode}`));
-            }
+            if (rsp.statusCode !== HTTPStatus.OK) return reject(new Error(`Got ${rsp.statusCode}`));
 
             try {
                 body = JSON.parse(body);
